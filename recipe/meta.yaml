@@ -26,7 +26,7 @@ requirements:
     - importlib_resources >=5.9
     - ds_store >=1.1.0
     - mac_alias >=2.0.1
-    - __osx
+    - __osx # [osx]
 
 test:
   imports:
