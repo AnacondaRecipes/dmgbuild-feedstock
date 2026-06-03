@@ -38,7 +38,8 @@ test:
   source_files:
     - tests
   commands:
-    - pytest -vvv
+    - pip check   # [osx]
+    - pytest -vvv # [osx]
 
 about:
   home: https://github.com/dmgbuild/dmgbuild
