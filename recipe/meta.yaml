@@ -1,28 +1,28 @@
 {% set name = "dmgbuild" %}
-{% set version = "1.6.5" %}
+{% set version = "1.6.7" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: c5cbeec574bad84a324348aa7c36d4aada04568c99fb104dec18d22ba3259f45
+  url: https://github.com/{{ name }}/{{ name }}/archive/refs/tags/v{{ version }}.tar.gz
+  sha256: 508689a0e15ac45e554f73133b6aeaf6e36d800beaa7003c935f3fbd5cfb21af
 
 build:
   number: 0
-  noarch: python
+  skip: true  # [py<310]
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
   entry_points:
     - dmgbuild = dmgbuild.__main__:main
 
 requirements:
   host:
-    - python {{ python_min }}
+    - python
     - pip
-    - setuptools
+    - setuptools 80.9.0
   run:
-    - python >={{ python_min }}
+    - python
     - importlib_resources >=5.9
     - ds_store >=1.1.0
     - mac_alias >=2.0.1
@@ -34,13 +34,11 @@ test:
   requires:
     - pip
     - pytest
-    - pytest-cov
-    - tox
-    - python {{ python_min }}
+    - python
   source_files:
     - tests
   commands:
-    - tox -e py
+    - pytest -vvv
 
 about:
   home: https://github.com/dmgbuild/dmgbuild
