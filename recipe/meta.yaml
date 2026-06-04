@@ -12,6 +12,7 @@ source:
 build:
   number: 0
   skip: true  # [py<310]
+  skip: true  # [not osx]
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
   entry_points:
     - dmgbuild = dmgbuild.__main__:main
@@ -26,7 +27,7 @@ requirements:
     - importlib_resources >=5.9
     - ds_store >=1.1.0
     - mac_alias >=2.0.1
-    - __osx # [osx]
+    - __osx
 
 test:
   imports:
@@ -38,13 +39,19 @@ test:
   source_files:
     - tests
   commands:
-    - pip check   # [osx]
-    - pytest -vvv # [osx]
+    - pip check
+    - pytest -vvv
 
 about:
   home: https://github.com/dmgbuild/dmgbuild
   doc_url: https://dmgbuild.readthedocs.io/en/latest/
+  dev_url: https://github.com/dmgbuild/dmgbuild
   summary: macOS command line utility to build disk images
+  description: |
+    dmgbuild is a command line tool to create macOS disk images (aka .dmg files). 
+    dmgbuild allows for full customization of the resulting disk image, without relying on Finder,
+    and without using deprecated APIs (like the Alias Manager functions).
+    dmgbuild is a wrapper around macOS specific tools, so it can't be used on Windows or Linux.
   license: MIT
   license_family: MIT
   license_file: LICENSE
