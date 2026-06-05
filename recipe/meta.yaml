@@ -11,8 +11,7 @@ source:
 
 build:
   number: 0
-  skip: true  # [py<310]
-  skip: true  # [not osx]
+  skip: true  # [py<310 or (not osx)]
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
   entry_points:
     - dmgbuild = dmgbuild.__main__:main
@@ -21,10 +20,9 @@ requirements:
   host:
     - python
     - pip
-    - setuptools 80.9.0
+    - setuptools
   run:
     - python
-    - importlib_resources >=5.9
     - ds_store >=1.1.0
     - mac_alias >=2.0.1
   run_constrained:
